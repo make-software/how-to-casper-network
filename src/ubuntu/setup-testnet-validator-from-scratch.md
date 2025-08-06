@@ -1,4 +1,4 @@
-# Setup Test Net validator node from scratch on Ubuntu 20.04
+# Setup Test Net validator node from scratch on Ubuntu 22.04
 
 [include ../testnet/testnet-warning.md]
 
