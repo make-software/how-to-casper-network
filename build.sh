@@ -18,7 +18,6 @@ rm -rf docs/*
 
 #files=($(find src -type f -name '*.md'))
 files=(
-    src/aws/setup-testnet-validator-from-scratch.md
     src/ubuntu/setup-testnet-validator-from-scratch.md
     src/faq-user.md
     src/faq-validator.md

@@ -1,10 +1,29 @@
 ## Configure and Run the Node
 
 ### Configure the node's firewall
-In order to secure your node somewhat from unauthorized/excessive connections/requests, you can configure the firewall of the node using a template ```ufw``` setup:
+In order to secure your node from unauthorized/excessive connections/requests, you can configure the firewall of the node using a template ```ufw``` setup, based on the node type you are setting up.
+
+**If it is a VALIDATOR node:**
 
 ```
 cd ~; curl -JLO https://genesis.casper.network/firewall_only_node_to_node.sh
+chmod +x ./firewall_only_node_to_node.sh
+
+# Look at this and make sure you understand what it does and want to run it on your server.
+# You will need to provide `y` to reset and enable steps.
+cat ./firewall_only_node_to_node.sh
+
+# Install firewall
+sudo ./firewall_only_node_to_node.sh
+
+# Allow Casper community Grafana instance
+sudo ufw allow from 144.217.10.28 to any port 8888
+```
+
+**If it is an ARCHIVAL or RPC node:**
+
+```
+cd ~; curl -JLO https://genesis.casper.network/firewall.sh
 chmod +x ./firewall.sh
 
 # Look at this and make sure you understand what it does and want to run it on your server.

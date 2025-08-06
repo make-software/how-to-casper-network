@@ -19,7 +19,6 @@ This documentation is aimed to help prospective node-operators set up and config
   - [Set up MainNet validator node](https://github.com/casper-network/casper-node/wiki/Mainnet-Node-Installation-Instructions)
 
 ### TestNet Guides
-  - [Set up TestNet validator node from scratch on AWS](/docs/aws/setup-testnet-validator-from-scratch.md)
   - [Set up TestNet validator node from scratch on Ubuntu](/docs/ubuntu/setup-testnet-validator-from-scratch.md)
 
 ### TestNet Information

@@ -1,4 +1,4 @@
-# Setup Test Net validator node from scratch on Ubuntu 20.04
+# Setup Test Net validator node from scratch on Ubuntu 22.04
 
 > ## **IMPORTANT**
 > By choosing to participate in the Casper Test Net, you acknowledge that you have reviewed and will abide by
@@ -75,7 +75,16 @@ sudo apt install jq -y
 
 We will use ```jq``` to process JSON responses from API later in the process
 
-### Remove Previous Versions
+### Install OpenSSL 1.1
+
+The recommended OS is `Ubuntu 22.04`, which comes with `OpenSSL 3`, but `casper-node` still depends on `OpenSSL 1.1`. Thus, you need to install it manually before installing `casper-node`:
+
+```bash
+cd ~ && curl -f -JLO http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb
+sudo apt install -y ./libssl1.1_1.1.1f-1ubuntu2_amd64.deb
+```
+
+### Remove Previous Versions (Not Needed for Fresh Installations)
 
 If you were running previous versions of the casper-node on this machine, first stop and remove the old versions:
 
@@ -95,7 +104,7 @@ Execute the following in order to add the Casper repository to `apt` in Ubuntu.
 ```shell
 sudo mkdir -m 0755 -p /etc/apt/keyrings/
 sudo curl https://repo.casper.network/casper-repo-pubkey.gpg --output /etc/apt/keyrings/casper-repo-pubkey.gpg
-echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/casper-repo-pubkey.gpg] https://repo.casper.network/releases focal main" | sudo tee -a /etc/apt/sources.list.d/casper.list
+echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/casper-repo-pubkey.gpg] https://repo.casper.network/releases jammy main" | sudo tee /etc/apt/sources.list.d/casper.list
 sudo apt update
 ```
 
@@ -140,10 +149,29 @@ Go to [Testnet CSPR.Live](https://testnet.cspr.live/), and [connect](https://www
 ## Configure and Run the Node
 
 ### Configure the node's firewall
-In order to secure your node somewhat from unauthorized/excessive connections/requests, you can configure the firewall of the node using a template ```ufw``` setup:
+In order to secure your node from unauthorized/excessive connections/requests, you can configure the firewall of the node using a template ```ufw``` setup, based on the node type you are setting up.
+
+**If it is a VALIDATOR node:**
 
 ```
 cd ~; curl -JLO https://genesis.casper.network/firewall_only_node_to_node.sh
+chmod +x ./firewall_only_node_to_node.sh
+
+# Look at this and make sure you understand what it does and want to run it on your server.
+# You will need to provide `y` to reset and enable steps.
+cat ./firewall_only_node_to_node.sh
+
+# Install firewall
+sudo ./firewall_only_node_to_node.sh
+
+# Allow Casper community Grafana instance
+sudo ufw allow from 144.217.10.28 to any port 8888
+```
+
+**If it is an ARCHIVAL or RPC node:**
+
+```
+cd ~; curl -JLO https://genesis.casper.network/firewall.sh
 chmod +x ./firewall.sh
 
 # Look at this and make sure you understand what it does and want to run it on your server.
