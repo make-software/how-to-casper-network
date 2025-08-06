@@ -180,9 +180,6 @@ cat ./firewall.sh
 
 # Install firewall
 sudo ./firewall.sh
-
-# Allow Casper community Grafana instance
-sudo ufw allow from 144.217.10.28 to any port 8888
 ```
 
 ### Stage all protocol upgrades
