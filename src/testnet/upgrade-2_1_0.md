@@ -29,5 +29,9 @@ casper-node-util watch
 
 If you don't see the `Next Upgrade` line here, then your upgrade staging was not executed successfully.
 
+## Release Notes
+
+See [the release notes](https://github.com/casper-network/casper-node/releases/tag/v2.1.0) for the details of the changes introduced with this upgrade.
+
 [include ../disclaimer.md]
 
